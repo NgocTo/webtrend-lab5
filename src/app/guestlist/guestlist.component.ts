@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Person} from '../person';
+import { PeopleService } from '../people.service';
 
 @Component({
   selector: 'app-guestlist',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GuestlistComponent implements OnInit {
 
-  constructor() { }
+  guests: Person[] = [];
+
+  constructor(private peopleService: PeopleService) { }
 
   ngOnInit() {
+    this.peopleService.getPeople().subscribe(results => this.guests = results);
   }
 
 }
