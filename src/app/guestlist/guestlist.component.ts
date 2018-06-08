@@ -9,12 +9,24 @@ import { PeopleService } from '../people.service';
 })
 export class GuestlistComponent implements OnInit {
 
+  guestSearch: Person = new Person(); // avoid undefined
+
+
   guests: Person[] = [];
 
+  // method to find people
+  findPeople(personQuery: Person): void {
+    console.log('search button clicked');
+
+    this.peopleService.getPeople(personQuery).subscribe(results =>this.guests = results);
+    
+  }
   constructor(private peopleService: PeopleService) { }
 
   ngOnInit() {
     this.peopleService.getPeople().subscribe(results => this.guests = results);
+    // assign property to guestSearch
+    this.guestSearch.firstName = "Lee";
   }
 
 }
